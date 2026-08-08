@@ -1,0 +1,49 @@
+name: Update Specs
+
+on:
+  schedule:
+    # Run every day at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-specs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch latest upstream versions and update specs
+        run: |
+          bash ./scripts/update_specs.sh
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          if [ -n "$(git status --porcelain -- '*.spec')" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No spec changes detected."
+          fi
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add '*.spec'
+
+          # Build a summary of what changed for the commit body.
+          BODY=""
+          for spec in *.spec; do
+            [ -e "$spec" ] || continue
+            VERSION="$(awk '/^Version:/ {print $2; exit}' "$spec")"
+            BODY+="  $spec: $VERSION"$'\n'
+          done
+
+          git commit -m "chore: update specs to latest upstream versions" -m "$BODY"
+          git push
