@@ -70,6 +70,8 @@ setcap cap_setuid+ep %{_bindir}/gsr-global-hotkeys
 %{_datadir}/gsr-ui
 %{_datadir}/applications/gpu-screen-recorder.desktop
 %{_datadir}/icons/hicolor/*/*/gpu-screen-recorder.png
+%{_mandir}/man1/gsr-ui.1*
+%{_mandir}/man1/gsr-ui-cli.1*
 
 %changelog
 * Fri Dec 13 2024 Brycen G <brycengranville@outlook.com> - r142.4c83972
