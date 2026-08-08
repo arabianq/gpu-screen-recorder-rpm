@@ -23,6 +23,7 @@ BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(wayland-egl)
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(pangoft2)
+BuildRequires:  pkgconfig(xkbcommon)
 Requires:       (google-noto-sans-fonts or noto-sans)
 
 %description

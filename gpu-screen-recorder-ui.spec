@@ -29,6 +29,7 @@ BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(dbus-1)
 BuildRequires:  pkgconfig(pangoft2)
+BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  (update-desktop-files or desktop-file-utils)
 BuildRequires:  kernel-headers
 Requires:       gpu-screen-recorder
