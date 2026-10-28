@@ -1,5 +1,5 @@
 Name:           gpu-screen-recorder-adwaita
-Version:        1.0.1
+Version:        2.0.1
 Release:        1%{?dist}
 Summary:        GNOME frontend for GPU Screen Recorder
 License:        GPL-3.0-or-later
